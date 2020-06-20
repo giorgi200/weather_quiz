@@ -1,0 +1,44 @@
+@import "reset.css";
+@import url('https://fonts.googleapis.com/css2?family=Lilita+One&display=swap');
+
+
+body{
+    background-color: #ecf0f1;
+}
+.quiz-container{
+    .question-section{
+        padding: 30px 15px;
+        margin-bottom: 30px;
+        text-align: center;
+    }
+    .quiz-question{
+        font-size: 30px;
+    }
+
+    .quiz-rows{
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-evenly;
+        .quiz-item{
+            .error{
+                border:solid 1px #f44336;
+                h2{
+                    color: #f44336;
+                }
+            }
+           
+            cursor: pointer;
+            text-align: center;
+            .quiz-city{
+                font-family: 'Lilita One', cursive;
+            }
+            .quiz-temp{
+                font-family: 'Lilita One', cursive;
+            }
+        }
+    }
+    .quiz-next{
+        display: block;
+        margin: 25px auto;
+    }
+}
