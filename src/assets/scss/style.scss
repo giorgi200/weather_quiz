@@ -5,6 +5,15 @@
 body{
     background-color: #ecf0f1;
 }
+.header-link{
+    text-decoration: none;
+    display: flex;
+    color: #fff;
+    align-items: center;
+    h6{
+        height: fit-content;
+    }
+}
 .quiz-container{
     .question-section{
         padding: 30px 15px;
@@ -21,9 +30,9 @@ body{
         justify-content: space-evenly;
         .quiz-item{
             .error{
-                border:solid 1px #f44336;
+                border:solid 1px #00a152;
                 h2{
-                    color: #f44336;
+                    color: #00a152;
                 }
             }
            
@@ -40,5 +49,11 @@ body{
     .quiz-next{
         display: block;
         margin: 25px auto;
+    }
+}
+.settings-container{
+    padding: 15px;
+    h5{
+        margin-bottom: 15px;
     }
 }
