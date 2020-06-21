@@ -14,6 +14,7 @@ import Axios from 'axios';
 import { connect } from 'react-redux';
 import { setQuiz } from '../store/index';
 
+
 class Quiz extends Component {
     
     state = {
@@ -75,19 +76,23 @@ class Quiz extends Component {
             },
         ]
     }
+
     selectId(val, array) {
         return array.find(object=>{
             return object.id === val
         })    
     }
+
     AddCities = () =>{
         let city1 = this.selectId(Math.floor(Math.random()*(this.state.cities.length)), this.state.cities)
         let city2 = this.selectId(Math.floor(Math.random()*(this.state.cities.length)), this.state.cities)
-        this.setState({checked:false})
+        this.setState({
+            checked:false,
+
+        })
 
         
         if(city1.id!==city2.id){
-            this.props.setQuiz([city1,city2])
             this.setState({city1,city2}) 
             this.getTemperature(city1, city2)
         } else{
@@ -109,21 +114,28 @@ class Quiz extends Component {
             this.setState({city2}) 
         })
     }
-    correctAnswer = index =>{
-        
-        let {city1, city2, checked} = this.state;
-        if(city1.temp > city2.temp&&index===city1.id&&!checked){
-            this.setState({
-                score:this.state.score+1,
-                correctAnswer:index
-            })
-        } else if(city1.temp < city2.temp&&index===city2.id&&!checked){
-            this.setState({
-                score:this.state.score+1,
-                correctAnswer:index
-            })
+
+    handleAnswer = index =>{
+        let {city1, city2, checked,correctAnswer,score} = this.state;
+
+        if(city1.temp > city2.temp&&!checked){
+            correctAnswer= city1.id
+        } else if(city1.temp < city2.temp&&!checked){
+            correctAnswer=city2.id
         }
-        this.setState({checked:true})
+        if (index===correctAnswer&&!checked){
+            score++
+        }
+        this.props.setQuiz({
+            city1,
+            city2,
+            chosen:index,
+        })
+        this.setState({
+            score,
+            correctAnswer,
+            checked:true,
+        })
     }
     componentWillMount(){
         this.AddCities();
@@ -143,16 +155,16 @@ class Quiz extends Component {
                     {
                         city1&&city2 ?
                         <div className="quiz-rows">
-                            <Grid className="quiz-item" item xs={4}>
-                                <Card className={correctAnswer === city1.id && checked ? "error" : ""} onClick={()=>{this.correctAnswer(city1.id)}}>
+                            <Grid className="quiz-item" item xs={12} sm={5} lg={4}>
+                                <Card className={correctAnswer === city1.id && checked ? "error" : ""} onClick={()=>{this.handleAnswer(city1.id)}}>
                                     <CardContent>
                                         <Typography color="primary" className="quiz-city" variant="h5" component="h2">{city1.country}, {city1.city}</Typography>
                                         { checked ? <Typography className="quiz-temp" color="textSecondary" gutterBottom>{ farenheit ? city1.farenheit + " F" : city1.temp +" C"}</Typography>:""}
                                     </CardContent>
                                 </Card>
-                            </Grid>
-                            <Grid className="quiz-item" item xs={4}>
-                                <Card className={correctAnswer === city2.id && checked ? "error" : ""} onClick={()=>{this.correctAnswer(city2.id)}}>
+                            </Grid> 
+                            <Grid className="quiz-item" item xs={12} sm={5} lg={4}>
+                                <Card className={correctAnswer === city2.id && checked ? "error" : ""} onClick={()=>{this.handleAnswer(city2.id)}}>
                                     <CardContent>
                                         <Typography color="primary" className="quiz-city" variant="h5" component="h2">{city2.country}, {city2.city}</Typography>
                                         { checked ? <Typography className="quiz-temp" color="textSecondary" gutterBottom>{ farenheit ? city2.farenheit + " F" : city2.temp +" C"}</Typography>:""}

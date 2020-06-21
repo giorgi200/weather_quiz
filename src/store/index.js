@@ -8,10 +8,14 @@ export const setQuiz = quiz => ({
 
 
 // Reducers
-export const quiz = (state = {}, action) => {
+export const quiz = (state = [], action) => {
   switch (action.type) {
     case 'SET_QUIZ':
-      return action.quiz;
+      return [
+        ...state,
+        action.quiz
+      ];
+    
     default:
       return state;
   }

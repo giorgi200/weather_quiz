@@ -10,6 +10,7 @@ body{
     display: flex;
     color: #fff;
     align-items: center;
+    outline: none !important;
     h6{
         height: fit-content;
     }
@@ -17,8 +18,10 @@ body{
 .quiz-container{
     .question-section{
         padding: 30px 15px;
-        margin-bottom: 30px;
         text-align: center;
+    }
+    .quiz-item{
+        margin-top: 30px;
     }
     .quiz-question{
         font-size: 30px;
@@ -27,33 +30,56 @@ body{
     .quiz-rows{
         display: flex;
         flex-wrap: wrap;
-        justify-content: space-evenly;
-        .quiz-item{
-            .error{
-                border:solid 1px #00a152;
-                h2{
-                    color: #00a152;
-                }
-            }
-           
-            cursor: pointer;
-            text-align: center;
-            .quiz-city{
-                font-family: 'Lilita One', cursive;
-            }
-            .quiz-temp{
-                font-family: 'Lilita One', cursive;
-            }
-        }
+        justify-content: space-evenly;   
     }
     .quiz-next{
         display: block;
         margin: 25px auto;
     }
 }
+.quiz-item{
+    .error{
+        border:solid 1px #00a152;
+        h2{
+            color: #00a152;
+        }
+    }
+   .incorrect{
+        border:solid 1px #f50057;
+        h2{
+            color: #f50057;
+        }
+   }
+    cursor: pointer;
+    text-align: center;
+    .quiz-city{
+        font-family: 'Lilita One', cursive;
+    }
+    .quiz-temp{
+        font-family: 'Lilita One', cursive;
+    }
+}
 .settings-container{
     padding: 15px;
+    margin-bottom: 30px;
     h5{
         margin-bottom: 15px;
+    }
+    .answerd-quizzes-sections{
+        margin-top: 20px;
+    }
+    .answerd-quizzes{
+        display: flex;
+        height: fit-content;
+        .quiz-item{
+            margin-right:15px;
+            margin-bottom:15px;
+        }
+        .quiz-card{
+            height: 100%;
+            align-items: center;
+            display: flex;
+            justify-content: center;
+        }
     }
 }
